@@ -1,5 +1,4 @@
-class ShippingFee
-  include ActiveHash::Base
+class ShippingFee < ActiveHash::Base
 
   self.data = [
     { id: 1, name: '---' },
