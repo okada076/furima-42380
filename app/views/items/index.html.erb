@@ -155,28 +155,19 @@
         <% end %>
 
     <% else %>
-      <%# 商品がない場合、ダミー商品表示 %>
-      <li class='list'>
-        <%= link_to "#" do %>
-          <div class='item-img-content'>
-            <%= image_tag "item-sample.png", class: "item-img" %>
-          </div>
-
-          <div class='item-info'>
-            <h3 class='item-name'>
-              商品名
-            </h3>
-            <div class='item-price'>
-              <span>販売価格円<br>配送料負担</span>
-              <div class='star-btn'>
-                <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'>0</span>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </li>
-    <% end %>
+  <%# 商品がない場合、ダミー商品表示 %>
+  <li class='list'>
+    <div class='item-img-content'>
+      <%= image_tag "item-sample.png", class: "item-img" %>
+    </div>
+    <div class='item-info'>
+      <h3 class='item-name'>
+        商品を出品してね！
+      </h3>
+    </div>
+  </li>
+<% end %>
+</li>
   </ul> 
 
 <%= link_to new_item_path, class: 'purchase-btn' do %>
