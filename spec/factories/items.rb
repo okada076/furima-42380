@@ -8,7 +8,7 @@ FactoryBot.define do
     shipping_fee_id       { 2 }
     prefecture_id         { 2 }
     scheduled_delivery_id { 2 }
-    association :user     # userと紐付ける
+    association :user # userと紐付ける
     after(:build) do |item|
       item.image.attach(
         io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_image.png')),
