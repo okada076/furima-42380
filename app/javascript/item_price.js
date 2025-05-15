@@ -1,7 +1,7 @@
-window.addEventListener('load', () => {
+document.addEventListener('turbo:load', () => {
   const priceInput = document.getElementById("item-price");
 
-  if (priceInput) {
+ if (priceInput) {
     priceInput.addEventListener("input", () => {
       const inputValue = priceInput.value;
 
