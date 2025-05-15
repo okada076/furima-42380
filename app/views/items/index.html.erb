@@ -126,18 +126,25 @@
     <div class="subtitle" >
       新規投稿商品
     </div>
-    
     <ul class='item-lists'>
+
+   <ul class='item-lists'>
     <% if @items.present? %>
       <% @items.each do |item| %>    
         <li class='list'>
           <div class='item-img-content'>
-          <%= link_to item_path(item) do %>
-              <% if item.image.attached? %>
-                <%= image_tag item.image, class: "item-img" %>
+          <%#= link_to item_path(item) do %>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, class: "item-img" %>
               <% end %>
-             <% end %>
-            </div>
+             <%# end %>
+          </div>
+
+           <%# 商品が売れていればsold outを表示しましょう %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+          <%# //商品が売れていればsold outを表示しましょう %>
 
             <div class='item-info'>
               <h3 class='item-name'>
@@ -157,9 +164,8 @@
     <% else %>
   <%# 商品がない場合、ダミー商品表示 %>
   <li class='list'>
-    <div class='item-img-content'>
-      <%= image_tag "item-sample.png", class: "item-img" %>
-    </div>
+    <%= link_to '#' do %>
+      <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
     <div class='item-info'>
       <h3 class='item-name'>
         商品を出品してね！
@@ -172,10 +178,10 @@
        </div>
       </div>
     </div>
+   <% end %>
   </li>
-<% end %>
-
-  </ul> 
+ <% end %>
+</ul> 
 
 <%= link_to new_item_path, class: 'purchase-btn' do %>
   <span class='purchase-btn-text'>出品する</span>
