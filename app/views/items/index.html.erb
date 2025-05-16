@@ -133,11 +133,11 @@
       <% @items.each do |item| %>    
         <li class='list'>
           <div class='item-img-content'>
-          <%#= link_to item_path(item) do %>
+          <%= link_to item_path(item) do %>
             <% if item.image.attached? %>
               <%= image_tag item.image, class: "item-img" %>
               <% end %>
-             <%# end %>
+             <% end %>
           </div>
 
           <!--
