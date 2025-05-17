@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :redirect_unless_owner, only: [:edit, :update]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -45,5 +46,10 @@ class ItemsController < ApplicationController
       :shipping_fee_id, :prefecture_id, :scheduled_delivery_id,
       :price, :image
     )
+  end
+
+  def redirect_unless_owner
+    @item = Item.find(params[:id])
+    redirect_to root_path if current_user != @item.user
   end
 end
