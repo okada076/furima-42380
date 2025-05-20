@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_item
-  
+
   def index
     @order_address = OrderAddress.new
   end
@@ -9,9 +9,9 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new(order_params)
    if @order_address.valid?
     @order_address.save
-    redirect_to root_path
+    return redirect_to root_path
    else
-    render :index
+    render :index, status: :unprocessable_entity
    end
   end
 
