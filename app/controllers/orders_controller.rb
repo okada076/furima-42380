@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item
+  before_action :redirect_if_invalid_user
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -24,6 +26,12 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
+  def redirect_if_invalid_user
+    return unless current_user.id == @item.user_id || @item.order.present?
+
+    redirect_to root_path
+  end
+
   def order_params
     params.require(:order_address).permit(
       :postal_code,
@@ -31,8 +39,7 @@ class OrdersController < ApplicationController
       :city,
       :address,
       :building_name,
-      :phone_number,
-      :token
+      :phone_number
     ).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
