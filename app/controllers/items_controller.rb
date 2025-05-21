@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :redirect_unless_owner, only: [:edit, :update, :destroy]
-  before_action :sold_out_redirect, only: [:edit]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :redirect_unless_owner, only: [:destroy]
+  before_action :redirect_unless_owner_and_unsold, only: [:edit, :update]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -60,7 +60,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def sold_out_redirect
-    redirect_to root_path if @item.order.present?
+  def redirect_unless_owner_and_unsold
+    # 出品者でない、または売却済みならトップページへ
+    redirect_to root_path if current_user != @item.user || @item.order.present?
   end
 end
