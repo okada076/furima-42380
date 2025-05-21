@@ -6,12 +6,13 @@ class OrdersController < ApplicationController
   end
 
   def create
+    binding.pry
     @order_address = OrderAddress.new(order_params)
    if @order_address.valid?
     @order_address.save
     return redirect_to root_path
    else
-    render :index, status: :unprocessable_entity
+    render 'index', status: :unprocessable_entity
    end
   end
 
@@ -30,7 +31,7 @@ class OrdersController < ApplicationController
     :building_name,
     :phone_number,
     :token
-  ).merge(user_id: current_user.id, item_id: params[:item_id])
+  ).merge(token: params[:token],user_id: current_user.id, item_id: params[:item_id])
  end
 
 end
