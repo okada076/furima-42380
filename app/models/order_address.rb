@@ -19,10 +19,10 @@ class OrderAddress
 
   def save
     # Order（購入情報）を保存
-    order = Order.create(user_id: user_id, item_id: item_id)
+    order = Order.create!(user_id: user_id, item_id: item_id)
 
     # Address（住所）を保存
-    Address.create(
+    Address.create!(
       postal_code: postal_code,
       prefecture_id: prefecture_id,
       city: city,

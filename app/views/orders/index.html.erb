@@ -1,7 +1,5 @@
 <%= render "shared/second-header"%>
 
- <%= include_gon %>
-
 <div class='transaction-contents'>
   <div class='transaction-main'>
     <h1 class='transaction-title-text'>
@@ -28,13 +26,13 @@
         支払金額
       </h1>
       <p class='item-payment-price'>
-        ¥<%= number_with_delimiter(@item.price) %>
+        <%= number_with_delimiter(@item.price) %>
       </p>
     </div>
     <%# /支払額の表示 %>
     <%= render 'shared/error_messages', model: @order_address %>
 
-    <%= form_with model: @order_address, id:'charge-form', class: 'transaction-form-wrap', url: item_orders_path(@item), local: true do |f| %>
+    <%= form_with model: @order_address, url: item_orders_path(@item), local: false, html: { id: 'charge-form', class: 'transaction-form-wrap' } do |f| %>
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
