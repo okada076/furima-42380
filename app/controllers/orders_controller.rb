@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
       @order_address.save
       redirect_to root_path
     else
+      puts @order_address.errors.full_messages
       render 'index', status: :unprocessable_entity
     end
   end

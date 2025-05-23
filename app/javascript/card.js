@@ -1,7 +1,7 @@
 
 
 const pay = () => {
-  if (typeof gon === 'undefined' || !gon.public_key) return;
+  // if (typeof gon === 'undefined' || !gon.public_key) return;
 
   const publicKey = gon.public_key
   const payjp = Payjp(publicKey) // PAY.JPテスト公開鍵
@@ -16,7 +16,6 @@ const pay = () => {
 
  const form = document.getElementById('charge-form')
   form.addEventListener("submit", (e) => {
-    e.preventDefault();
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
       } else {
@@ -26,15 +25,14 @@ const pay = () => {
         tokenInput.setAttribute('name', 'token');
         tokenInput.setAttribute('value', token);
         form.appendChild(tokenInput);
-
-        form.submit();
       }
       numberElement.clear();
       expiryElement.clear();
       cvcElement.clear();
-      document.getElementById("charge-form")
-    });
+      document.getElementById("charge-form").submit();
 
+    });
+    e.preventDefault();
   });
 };
 
