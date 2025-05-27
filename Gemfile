@@ -73,7 +73,6 @@ end
 
 
 group :production do
-  gem 'pg' , '~> 1.5.3'
   gem 'unicorn', '6.1.0'
 end
 
@@ -88,3 +87,5 @@ gem 'payjp'
 gem 'gon'
 
 gem "aws-sdk-s3", require: false
+
+gem "sprockets-rails"
